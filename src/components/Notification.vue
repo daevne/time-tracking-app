@@ -24,7 +24,6 @@
         },
         computed: {
             alertType() {
-                console.log(this.type);
                 return {
                     success: 'alert-success',
                     danger: 'alert-danger',
