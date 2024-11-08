@@ -1,4 +1,12 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import mitt from 'mitt';
+import App from './App.vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 
-createApp(App).mount('#app')
+const emitter = mitt();
+const app = createApp(App);
+
+app.config.globalProperties.emitter = emitter;
+
+app.mount('#app');

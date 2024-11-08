@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # time-tracking-app
 Simple time-tracking application built with Vue.js and Bootstrap, enabling users to log and view their working hours in daily, weekly, or monthly views. Supports local data storage with localStorage.
 
@@ -37,3 +38,23 @@ npm install --save mitt
 npm run serve
 ```
 ### 4. Access the app http://localhost:8080
+=======
+# Időnyilvántartó Rendszer
+
+Ez az egyszerű időnyilvántartó rendszer Vue.js-t, Bootstrap-et és LocalStorage-t használ.
+
+## Telepítés
+1. Klónozd a projektet: `git clone <repo-url>`
+2. Navigálj a projekt mappájába: `cd time-tracking-app`
+3. Telepítsd a függőségeket: `npm install`
+    bootstrap
+    bootstrap icons
+    mitt
+    date-fns
+
+4. Indítsd el a fejlesztői szervert: `npm run serve`
+
+## Funkciók
+- Munkaidő bejegyzések létrehozása, szerkesztése és törlése
+- Bejegyzések listázása napi, heti és havi nézetben
+>>>>>>> 78d3e56 (init: initial commit)
