@@ -64,11 +64,11 @@
         },
         created() {
             this.emitter.on('entryAdded', () => {
-                this.entries = storageService.getEntries();
+                this.updateEntries();
                 this.$emit('entryAdded');
             });
             this.emitter.on('entryEdited', () => {
-                this.entries = storageService.getEntries();
+                this.updateEntries();
                 this.$emit('entryEdited');
             });
         },
@@ -80,12 +80,15 @@
             }
         },
         mounted() {
-            this.entries = storageService.getEntries();
+            this.updateEntries();
         },
         methods: {
+            updateEntries() {
+                this.entries = storageService.getEntries();
+            },
             deleteEntry(id) {
                 storageService.deleteEntry(id);
-                this.entries = storageService.getEntries();
+                this.updateEntries();
                 this.emitter.emit('entryDeleted');
                 this.$emit('entryDeleted');
             },
