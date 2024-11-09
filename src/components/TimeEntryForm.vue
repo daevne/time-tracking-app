@@ -38,6 +38,15 @@
     import { storageService } from '../storageService';
     import NotificationAlert from './Notification.vue';
 
+    const DEFAULT_ENTRY = {
+        date: '',
+        startTime: '',
+        endTime: '',
+        description: '',
+        tags: '',
+        id: Date.now()
+    };
+
     export default {
         components: {
             NotificationAlert
@@ -51,14 +60,7 @@
         },
         data() {
             return {
-                entry: {
-                    date: '',
-                    startTime: '',
-                    endTime: '',
-                    description: '',
-                    tags: '',
-                    id: Date.now()
-                },
+                entry: { ...DEFAULT_ENTRY },
                 formTitle: 'Új bejegyzés',
                 notification: {
                     message: '',
@@ -73,7 +75,7 @@
                         this.entry = { ...newEntry };
                         this.formTitle = 'Bejegyzés módosítása';
                     } else {
-                        this.formTitle = 'Új bejegyzés';
+                        this.resetForm();
                     }
                 },
                 immediate: true
@@ -81,24 +83,34 @@
         },
         methods: {
             handleSubmit() {
-                const startDateTime = new Date(`${this.entry.date}T${this.entry.startTime}`);
-                const endDateTime = new Date(`${this.entry.date}T${this.entry.endTime}`);
-                
-                if (endDateTime < startDateTime) {
+                if (!this.isEndTimeValid()) {
                     this.showNotification('A befejezés időpontja nem lehet korábbi, mint a kezdés időpontja.', 'danger');   
                     return;
                 }
                 
                 if (this.entryToEdit && this.entryToEdit.id) {
-                    storageService.updateEntry(this.entry);
-                    this.emitter.emit('entryEdited');
+                    this.updateEntry();
                 } else {
-                    storageService.saveEntry(this.entry);
-                    this.emitter.emit('entryAdded');
+                    this.saveEntry();
                 }
-                this.entry = { date: '', startTime: '', endTime: '', description: '', tags: '', id: Date.now() };
+                this.resetForm();
+            },
+            isEndTimeValid() {
+                const startDateTime = new Date(`${this.entry.date}T${this.entry.startTime}`);
+                const endDateTime = new Date(`${this.entry.date}T${this.entry.endTime}`);
+                return endDateTime >= startDateTime;
+            },
+            updateEntry() {
+                storageService.updateEntry(this.entry);
+                this.emitter.emit('entryEdited');
+            },
+            saveEntry() {
+                storageService.saveEntry(this.entry);
+                this.emitter.emit('entryAdded');
+            },
+            resetForm() {
+                this.entry = { ...DEFAULT_ENTRY };
                 this.formTitle = 'Új bejegyzés';
-                this.emitter.emit('entryAdded');                
             }
         }
     };
