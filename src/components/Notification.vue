@@ -1,10 +1,17 @@
 <template>
-    <div v-if="isVisible" class="alert" :class="alertType" role="alert">
+    <div v-if="isVisible" class="alert" :class="alertClass" role="alert">
         {{ message }}
     </div>
 </template>
     
 <script>
+    const ALERT_DISPLAY_TIME = 3000;
+    const ALERT_CLASSES = {
+        success: 'alert-success',
+        danger: 'alert-danger',
+        info: 'alert-info'
+    };
+
     export default {
         name: 'NotificationAlert',
         props: {
@@ -12,7 +19,7 @@
                 type: String,
                 required: true
             },
-            type: {
+            alertType: {
                 type: String,
                 default: 'success'
             }
@@ -23,25 +30,24 @@
             };
         },
         computed: {
-            alertType() {
-                return {
-                    success: 'alert-success',
-                    danger: 'alert-danger',
-                    info: 'alert-info'
-                    }[this.type];
+            alertClass() {
+                return ALERT_CLASSES[this.alertType];
             }
         },
         mounted() {
-            setTimeout(() => {
-                this.isVisible = false;
-            }, 3000);
+            this.hideAlertAfterTimeout();
         },
         watch: {
             message() {
                 this.isVisible = true;
+                this.hideAlertAfterTimeout();
+            }
+        },
+        methods: {
+            hideAlertAfterTimeout() {
                 setTimeout(() => {
                     this.isVisible = false;
-                }, 3000);
+                }, ALERT_DISPLAY_TIME);
             }
         }
     };

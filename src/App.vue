@@ -15,7 +15,7 @@
     </div>
 
     <div class="row notification mb-3 p-2">
-      <Notification v-if="notification.message" :message="notification.message" :type="notification.type" />
+      <Notification v-if="notification.message" :message="notification.message" :alertType="notification.type" />
     </div>
 
     <div class="row entry-list p-2">
