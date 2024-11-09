@@ -1,24 +1,34 @@
+const STORAGE_KEY = 'timeEntries';
+
+function getEntriesFromStorage() {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+}
+
+function saveEntriesToStorage(entries) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
+}
+
 export const storageService = {
     saveEntry(entry) {
-        let entries = JSON.parse(localStorage.getItem('timeEntries')) || [];
+        const entries = getEntriesFromStorage();
         entries.push(entry);
-        localStorage.setItem('timeEntries', JSON.stringify(entries));
+        saveEntriesToStorage(entries);
     },
     getEntries() {
-        return JSON.parse(localStorage.getItem('timeEntries')) || [];
+        return getEntriesFromStorage()
     },
     deleteEntry(id) {
-        let entries = JSON.parse(localStorage.getItem('timeEntries')) || [];
+        let entries = getEntriesFromStorage()
         entries = entries.filter(entry => entry.id !== id);
-        localStorage.setItem('timeEntries', JSON.stringify(entries));
+        saveEntriesToStorage(entries);
     },
     getEntryById(id) {
-        let entries = JSON.parse(localStorage.getItem('timeEntries')) || [];
+        const entries = getEntriesFromStorage();
         return entries.find(entry => entry.id === id);
     },
     updateEntry(updatedEntry) {
-        let entries = JSON.parse(localStorage.getItem('timeEntries')) || [];
+        let entries = getEntriesFromStorage();
         entries = entries.map(entry => entry.id === updatedEntry.id ? updatedEntry : entry);
-        localStorage.setItem('timeEntries', JSON.stringify(entries));
+        saveEntriesToStorage(entries);
     }
 };
