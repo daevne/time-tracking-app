@@ -1,32 +1,32 @@
 <template>
   <div id="app" class="container-fluid" style="font-family: 'Merienda', sans-serif;">
-    <div class="row title mb-5">
+    <div class="row title">
       <div class="col-12 bg-dark text-white text-center py-2">
         <h1>Munkaidő Nyilvántartó</h1>
       </div>
     </div>
 
-    <div class="row entry-form mb-3">
-      <TimeEntryForm 
-        @entryAdded="handleEntryAdded" 
-        :entryToEdit="entryToEdit"
-        :showNotification="showNotification" 
-      />
-    </div>
-
-    <div class="row notification mb-3 p-2">
+    <div class="container p-4">
+      <div class="row entry-form">
+        <TimeEntryForm 
+          @entryAdded="handleEntryAdded" 
+          :entryToEdit="entryToEdit"
+          :showNotification="showNotification" 
+        />
+      </div>
+  
       <Notification v-if="notification.message" :message="notification.message" :alertType="notification.type" />
-    </div>
-
-    <div class="row entry-list p-2">
-      <TimeEntryList 
-        :currentView="currentView" 
-        :selectedDate="selectedDate" 
-        :entries="entries"
-        @entryAdded="handleEntryAdded"
-        @entryDeleted="handleEntryDeleted"
-        @entryEdited="handleEntryEdited"
-      />
+  
+      <div class="row entry-list">
+        <TimeEntryList 
+          :currentView="currentView" 
+          :selectedDate="selectedDate" 
+          :entries="entries"
+          @entryAdded="handleEntryAdded"
+          @entryDeleted="handleEntryDeleted"
+          @entryEdited="handleEntryEdited"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -103,8 +103,12 @@
     background-color:aliceblue;
   }
 
-  h1 {
-    font-size: 2.5rem;
+  html {
+    font-size: 14px;
+}
+
+  body {
+      font-size: 1rem;
   }
 
   .title {

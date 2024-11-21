@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{ selectedDate }}</h2>
+        <h4>{{ selectedDate }}</h4>
         <EntryList :entries="filteredEntries" :showDate="false" @edit-entry="editEntry" @delete-entry="deleteEntry" />
     </div>
 </template>

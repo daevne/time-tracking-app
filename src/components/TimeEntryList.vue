@@ -1,42 +1,64 @@
 <template>
-    <div class="container">
-        <div class="row">
+    <div class="container p-4 bg-light rounded shadow-sm">
+        <div class="row mb-3">
             <div class="col-12">
-                <h2 class="mb-3">Bejegyzések</h2>
+                <h2 class="text-center text-primary">Bejegyzések</h2>
             </div>
         </div>
         <div class="row mb-4 text-center">
-            <div class="col-12 col-lg-4 offset-lg-4">
-                <fieldset>
-                    <div class="form-check-inline mb-2">
-                        <input class="form-check-input" type="radio" id="daily" value="daily" v-model="currentView" name="viewOption">
-                        <label class="form-check-label ms-1" for="daily">
-                            Ma
-                        </label>
-                    </div>
-                    <div class="form-check-inline">
-                        <input class="form-check-input" type="radio" id="weekly" value="weekly" v-model="currentView" name="viewOption">
-                        <label class="form-check-label ms-1" for="weekly">
-                            Ezen a héten
-                        </label>
-                    </div>
-                    <div class="form-check-inline">
-                        <input class="form-check-input" type="radio" id="monthly" value="monthly" v-model="currentView" name="viewOption">
-                        <label class="form-check-label ms-1" for="monthly">
-                            Ebben a hónapban
-                        </label>
+            <div class="col-12 col-lg-6 offset-lg-3">
+                <fieldset class="border p-3 rounded">
+                    <legend class="float-none w-auto px-2 text-secondary">Nézet választása</legend>
+                    <div class="d-flex justify-content-center gap-3">
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                id="daily" 
+                                value="daily" 
+                                v-model="currentView" 
+                                name="viewOption">
+                            <label class="form-check-label" for="daily">
+                                Ma
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                id="weekly" 
+                                value="weekly" 
+                                v-model="currentView" 
+                                name="viewOption">
+                            <label class="form-check-label" for="weekly">
+                                Ezen a héten
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input 
+                                class="form-check-input" 
+                                type="radio" 
+                                id="monthly" 
+                                value="monthly" 
+                                v-model="currentView" 
+                                name="viewOption">
+                            <label class="form-check-label" for="monthly">
+                                Ebben a hónapban
+                            </label>
+                        </div>
                     </div>
                 </fieldset>
             </div>
         </div>
-        <div class="row component">
-            <div class="col-12 col-md-6 offset-md-3">
+        <div class="row">
+            <div class="col-12 col-md-8 offset-md-2">
                 <component 
                     :is="currentComponent" 
                     :entries="entries" 
                     :selectedDate="selectedDate" 
                     :deleteEntry="deleteEntry"
                     :editEntry="editEntry"
+                    class="border p-4 rounded bg-white shadow-sm"
                 />
             </div>
         </div>
@@ -98,11 +120,3 @@
         }
     };
 </script>
-
-<style scoped>
-    .container {
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        padding: 20px;
-    }
-</style>

@@ -1,33 +1,65 @@
 <template>
-    <div class="container mb-4">
-        <div class="row">
-            <div class="col-12 col-lg-4 offset-lg-4">
-                <h2 class="text-center mb-3">{{ formTitle }}</h2>
-                <NotificationAlert v-if="notification.message" :message="notification.message" :type="notification.type" />
+    <div class="container my-3 p-3 bg-light rounded shadow-sm">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-6">
+                <h2 class="text-center mb-2 text-primary">{{ formTitle }}</h2>
+                <NotificationAlert 
+                    v-if="notification.message" 
+                    :message="notification.message" 
+                    :type="notification.type" 
+                />
                 <form @submit.prevent="handleSubmit">
-                    <div class="mb-3">
+                    <div class="form-floating mb-3">
+                        <input 
+                            type="date" 
+                            v-model="entry.date" 
+                            required 
+                            class="form-control" 
+                            id="date" 
+                            placeholder="Dátum">
                         <label for="date">Dátum</label>
-                        <input type="date" v-model="entry.date" required class="form-control" id="date">
                     </div>
-                    <div class="mb-3">
+                    <div class="form-floating mb-3">
+                        <input 
+                            type="time" 
+                            v-model="entry.startTime" 
+                            required 
+                            class="form-control" 
+                            id="startTime" 
+                            placeholder="Kezdés Időpontja">
                         <label for="startTime">Kezdés Időpontja</label>
-                        <input type="time" v-model="entry.startTime" required class="form-control" id="startTime">
                     </div>
-                    <div class="mb-3">
+                    <div class="form-floating mb-3">
+                        <input 
+                            type="time" 
+                            v-model="entry.endTime" 
+                            required 
+                            class="form-control" 
+                            id="endTime" 
+                            placeholder="Befejezés Időpontja">
                         <label for="endTime">Befejezés Időpontja</label>
-                        <input type="time" v-model="entry.endTime" required class="form-control" id="endTime">
                     </div>
-                    <div class="mb-3">
-                        <label for="description">Feladat Leírása</label>
-                        <textarea v-model="entry.description" required class="form-control" id="description"></textarea>
+                    <div class="form-floating mb-3">
+                        <textarea 
+                            v-model="entry.description" 
+                            required 
+                            class="form-control" 
+                            id="description" 
+                            placeholder="Feladat Leírása"></textarea>
+                        <label for="description">A feladat leírása</label>
                     </div>
-                    <div class="mb-3">
+                    <div class="form-floating mb-3">
+                        <input 
+                            type="text" 
+                            v-model="entry.tags" 
+                            class="form-control" 
+                            id="tags" 
+                            placeholder="Címkék (vesszővel elválasztva)">
                         <label for="tags">Címkék (vesszővel elválasztva)</label>
-                        <input type="text" v-model="entry.tags" class="form-control" id="tags">
                     </div>
-                    <div class="mb-3 text-center">
-                        <button type="submit" class="btn btn-outline-primary">Mentés</button>
-                    </div>                
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg">Mentés</button>
+                    </div>
                 </form>
             </div>
         </div>

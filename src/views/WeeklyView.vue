@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{ weekNumber }}. Hét</h2>
+        <h4>{{ weekNumber }}. Hét</h4>
         <EntryList :entries="filteredEntries" @edit-entry="editEntry" @delete-entry="deleteEntry" />
     </div>
 </template>

@@ -1,6 +1,10 @@
 <template>
-    <div v-if="isVisible" class="alert" :class="alertClass" role="alert">
-        {{ message }}
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <div v-if="isVisible" class="alert shadow-sm rounded border-0" :class="alertClass" role="alert">
+                {{ message }}
+            </div>
+        </div>
     </div>
 </template>
     

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>{{ monthName }}</h2>
+        <h4>{{ monthName }}</h4>
         <EntryList :entries="filteredEntries" @edit-entry="editEntry" @delete-entry="deleteEntry" />
     </div>
 </template>
